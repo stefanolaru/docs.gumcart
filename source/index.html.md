@@ -20,4 +20,4 @@ code_clipboard: true
 
 # Introduction
 
-Welcome to the GumCart API!
+Welcome to the **GumCart API**.

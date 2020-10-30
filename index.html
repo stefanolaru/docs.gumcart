@@ -352,6 +352,11 @@
           </li>
           <li>
             <a href="#api-reference" class="toc-h1 toc-link" data-title="API Reference">API Reference</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+              </ul>
           </li>
       </ul>
         <ul class="toc-footer">
@@ -686,6 +691,30 @@
 </tr>
 </tbody></table>
 <h1 id='api-reference'>API Reference</h1>
+<p>Welcome to the GumCart API. You can use this to access GumCart API endpoints, which can get information about your shop &amp; orders.</p>
+<h2 id='authentication'>Authentication</h2>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"https://api.gumcart.com"</span>
+  <span class="nt">--header</span> <span class="s1">'X-APIKEY: yourapikey'</span> <span class="se">\</span>
+  <span class="nt">--header</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+</code></pre></div>
+<blockquote>
+<p>Make sure to replace <code>yourapikey</code> with your API key.</p>
+</blockquote>
+
+<p>GumCart uses API keys to allow access to the API. To obtain an API key please go to https://www.gumcart.com</p>
+
+<p>We expect for the API key to be included in the majority of API requests in a header that looks like the following:</p>
+
+<p><code>X-APIKEY: yourapikey</code></p>
+
+<aside class="notice">
+You must replace <code>yourapikey</code> with your API key.
+</aside>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">

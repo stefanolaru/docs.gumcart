@@ -24,3 +24,7 @@ We expect for the API key to be included in the majority of API requests in a he
 <aside class="notice">
 You must replace <code>yourapikey</code> with your API key.
 </aside>
+
+## Orders
+
+## Shop

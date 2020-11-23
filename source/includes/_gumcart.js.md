@@ -11,7 +11,7 @@ gumcart.js is a small Javascript library that will help seamlessly integrate the
 
 Getting started is as easy:
 
-1. Visit app.gumcart.com to get a shop ID.
+1. Visit https://gumcart.com to get a shop ID.
 2. Install gumcart.js via script tag.
 
 ```js
@@ -82,14 +82,7 @@ GumCart.addItem({
     name: "My nice Product",
     quantity: 1,
     price: 79.99,
-})
-    .then(() => {
-        // This code runs once item was added
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+});
 ```
 
 Add a single item to the cart.
@@ -110,14 +103,7 @@ See the list of the parameters on **The Cart Item Object**
 ```js
 GumCart.updateItem("unique-product-id", {
     quantity: 3,
-})
-    .then(() => {
-        // This code runs once item was added
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+});
 ```
 
 Update properties of a single cart item by ID.
@@ -129,14 +115,7 @@ _Returns the updated cart item object_
 ## Remove an item
 
 ```js
-GumCart.removeItem("unique-product-id")
-    .then(() => {
-        // This code runs once item was added
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+GumCart.removeItem("unique-product-id");
 ```
 
 Remove a single item from the cart by ID.
@@ -146,15 +125,7 @@ _Returns TRUE/FALSE_
 ## Get all items
 
 ```js
-GumCart.getItems()
-    .then((items) => {
-        // we have the items here
-        console.log(items);
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+GumCart.getItems();
 ```
 
 Get the list of items from the cart.
@@ -177,14 +148,7 @@ _Returns TRUE/FALSE_
 GumCart.setCustomer({
     email: "john.doe@gumcart.com",
     name: "John Doe",
-})
-    .then(() => {
-        // This code runs once customer data was set
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+});
 ```
 
 Update the cart with customer information.
@@ -194,15 +158,7 @@ _Returns TRUE/FALSE_
 ## Get Customer Data
 
 ```js
-GumCart.getCustomer()
-    .then((customer) => {
-        // we have the customer data here
-        console.log(customer);
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+GumCart.getCustomer();
 ```
 
 Get the cart customer information.
@@ -238,21 +194,7 @@ _Returns TRUE/FALSE_
 ## Get Shipping Info
 
 ```js
-GumCart.getShipping()
-    .then((info) => {
-        // we have the info here
-        console.log(info);
-        /*
-        {
-            address: {...},
-            method: 'flat'
-        }
-        */
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+GumCart.getShipping();
 ```
 
 Get the cart shipping information.
@@ -262,14 +204,7 @@ _Returns object_
 ## Set Shipping Value
 
 ```js
-GumCart.setShippingValue(value)
-    .then(() => {
-        // this runs once value was set
-    })
-    .catch((err) => {
-        // This code runs if there were any errors
-        console.log(err);
-    });
+GumCart.setShippingValue(value);
 ```
 
 Sets the cart shipping value. This method allows you to create custom shipping cost calculation and override the cart one.

@@ -27,4 +27,8 @@ You must replace <code>yourapikey</code> with your API key.
 
 ## Orders
 
+In progress.
+
 ## Shop
+
+In progress.

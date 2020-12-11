@@ -1,7 +1,7 @@
 # gumcart.js
 
 ```html
-<script src="https://cdn.gumcart.com/cart.js"></script>
+<script src="https://scripts.gumcart.com/latest.js"></script>
 <script>
     window.GumCart && window.GumCart.init("shop/id");
 </script>

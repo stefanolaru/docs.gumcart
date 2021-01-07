@@ -288,7 +288,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -297,10 +297,6 @@
     </a>
     <div class="toc-wrapper">
       <div class="gumcart-logo"><span>Gum</span>Cart<span>.docs</span></div>
-        <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -334,16 +330,13 @@
                     <a href="#update-customer-info" class="toc-h2 toc-link" data-title="Update Customer Info">Update Customer Info</a>
                   </li>
                   <li>
-                    <a href="#get-customer-data" class="toc-h2 toc-link" data-title="Get Customer Data">Get Customer Data</a>
+                    <a href="#get-customer-info" class="toc-h2 toc-link" data-title="Get Customer Info">Get Customer Info</a>
                   </li>
                   <li>
                     <a href="#update-shipping-info" class="toc-h2 toc-link" data-title="Update Shipping Info">Update Shipping Info</a>
                   </li>
                   <li>
                     <a href="#get-shipping-info" class="toc-h2 toc-link" data-title="Get Shipping Info">Get Shipping Info</a>
-                  </li>
-                  <li>
-                    <a href="#set-shipping-value" class="toc-h2 toc-link" data-title="Set Shipping Value">Set Shipping Value</a>
                   </li>
                   <li>
                     <a href="#events" class="toc-h2 toc-link" data-title="Events">Events</a>
@@ -485,11 +478,19 @@
     <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">My nice Product</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">quantity</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="na">price</span><span class="p">:</span> <span class="mf">79.99</span><span class="p">,</span>
-<span class="p">});</span>
+<span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully added to cart</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> was added to cart</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Add a single item to the cart.</p>
 
-<p><em>Returns TRUE</em></p>
+<p><em>Returns a Promise</em></p>
 
 <table><thead>
 <tr>
@@ -516,119 +517,202 @@
 </tbody></table>
 
 <p>See the list of the parameters on <strong>The Cart Item Object</strong></p>
-<h2 id='update-an-item'>Update an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">updateItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">unique-product-id</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+<h2 id='update-an-item'>Update an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">updateItem</span><span class="p">(</span><span class="nx">itemId</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">quantity</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-<span class="p">});</span>
+<span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> was updated</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Update properties of a single cart item by ID.</p>
 
 <p>See the list of available properties on <strong>The Cart Item Object</strong></p>
 
-<p><em>Returns the updated cart item object</em></p>
-<h2 id='remove-an-item'>Remove an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">unique-product-id</span><span class="dl">"</span><span class="p">);</span>
+<p><em>Returns a Promise</em></p>
+<h2 id='remove-an-item'>Remove an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="nx">itemId</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully removed</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> was removed from the cart</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Remove a single item from the cart by ID.</p>
 
-<p><em>Returns TRUE/FALSE</em></p>
-<h2 id='get-all-items'>Get all items</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
+<p><em>Returns a Promise</em></p>
+<h2 id='get-all-items'>Get all items</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getItems</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">items</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully returned the array of items</span>
+        <span class="c1">// loop through the array of items</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">items</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+            <span class="p">});</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Get the list of items from the cart.</p>
 
-<p><em>Returns array of cart items</em></p>
-<h2 id='empty-the-cart'>Empty the cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">empty</span><span class="p">();</span>
+<p><em>Returns a Promise</em></p>
+<h2 id='empty-the-cart'>Empty the cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully emptied the cart</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The cart was emptied</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Removes all items from the cart.</p>
 
-<p><em>Returns TRUE/FALSE</em></p>
+<p><em>Returns a Promise</em></p>
 <h2 id='update-customer-info'>Update Customer Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">setCustomer</span><span class="p">({</span>
     <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john.doe@gumcart.com</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John Doe</span><span class="dl">"</span><span class="p">,</span>
-<span class="p">});</span>
+<span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated customer info</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The customer info was updated.</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
-<p>Update the cart with customer information.</p>
+<p>Update the checkout with customer information.</p>
 
-<p><em>Returns TRUE/FALSE</em></p>
-<h2 id='get-customer-data'>Get Customer Data</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getCustomer</span><span class="p">();</span>
+<p><em>Returns a Promise</em></p>
+<h2 id='get-customer-info'>Get Customer Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getCustomer</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully received the customer info</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Customer name: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">customer</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Get the cart customer information.</p>
 
-<p><em>Returns customer data object</em></p>
+<p><em>Returns a Promise</em></p>
 <h2 id='update-shipping-info'>Update Shipping Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">setShipping</span><span class="p">({</span>
-    <span class="na">address</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">address</span><span class="p">:</span> <span class="dl">"</span><span class="s2">132 Harvest Way</span><span class="dl">"</span><span class="p">,</span>
-        <span class="na">city</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Crandall</span><span class="dl">"</span><span class="p">,</span>
-        <span class="na">state</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TX</span><span class="dl">"</span><span class="p">,</span>
-        <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75114</span><span class="dl">"</span><span class="p">,</span>
-        <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US</span><span class="dl">"</span><span class="p">,</span>
-    <span class="p">},</span>
+    <span class="na">address</span><span class="p">:</span> <span class="dl">"</span><span class="s2">132 Harvest Way</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">city</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Crandall</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">state</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TX</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75114</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">flat</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// This code runs once customer data was set</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">shipping</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated shipping info</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shipping</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// This code runs if there were any errors</span>
+        <span class="c1">// oops something bad happened</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
 <p>Update the cart with customer shipping information, address or shipping method.</p>
 
 <p><em>Returns TRUE/FALSE</em></p>
-<h2 id='get-shipping-info'>Get Shipping Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getShipping</span><span class="p">();</span>
+<h2 id='get-shipping-info'>Get Shipping Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getShipping</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">shipping</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully emptied the cart</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Shipping address:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">shipping</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
 </code></pre></div>
 <p>Get the cart shipping information.</p>
 
-<p><em>Returns object</em></p>
-<h2 id='set-shipping-value'>Set Shipping Value</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">setShippingValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div>
-<p>Sets the cart shipping value. This method allows you to create custom shipping cost calculation and override the cart one.</p>
-
-<p><em>Returns TRUE/FALSE</em></p>
-<h2 id='events'>Events</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">gumcart.ready</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// cart is loaded, do something here</span>
+<p><em>Returns a Promise</em></p>
+<h2 id='events'>Events</h2>
+<p>These events will fire anytime an action happen in the shopping cart or checkout flow. Use listeners to customise the experience.</p>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">ready</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// GumCart is loaded, do something here</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">totals.change</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// GumCart totals change, console log the amounts</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Shipping: $</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">shipping_price</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tax: $</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">tax_amount</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Total amount: $</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">total_amount</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <table><thead>
 <tr>
-<th>Event</th>
+<th>Event name</th>
+<th>Data</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>gumcart.ready</td>
-<td>The shopping cart is loaded &amp; ready</td>
+<td>ready</td>
+<td>-</td>
+<td>The cart is loaded &amp; ready</td>
 </tr>
 <tr>
-<td>gumcart.open</td>
+<td>open</td>
+<td>-</td>
 <td>The shopping cart opened</td>
 </tr>
 <tr>
-<td>gumcart.close</td>
+<td>close</td>
+<td>-</td>
 <td>The shopping cart closed</td>
 </tr>
 <tr>
-<td>gumcart.empty</td>
-<td>The shopping cart was emptied</td>
+<td>item.add</td>
+<td>item</td>
+<td>Item was added to cart</td>
 </tr>
 <tr>
-<td>gumcart.step</td>
-<td>The shopping cart switched from cart/checkout step</td>
+<td>item.update</td>
+<td>item</td>
+<td>The cart item was updated</td>
 </tr>
 <tr>
-<td>gumcart.item.added</td>
-<td>Item was added</td>
+<td>item.remove</td>
+<td>item</td>
+<td>Item was removed from cart</td>
 </tr>
 <tr>
-<td>gumcart.item.removed</td>
-<td>Item was removed</td>
+<td>totals.change</td>
+<td>totals</td>
+<td>Total amount of the cart changed</td>
 </tr>
 <tr>
-<td>gumcart.items.update</td>
-<td>One of the cart items was updated</td>
+<td>customer.change</td>
+<td>customer</td>
+<td>Customer data was updated</td>
 </tr>
 <tr>
-<td>gumcart.value.update</td>
-<td>The cart total amount was changed</td>
+<td>shipping.change</td>
+<td>shipping</td>
+<td>Shipping info was updated</td>
+</tr>
+<tr>
+<td>billing.change</td>
+<td>billing</td>
+<td>Billing info was updated</td>
+</tr>
+<tr>
+<td>order.create</td>
+<td>order</td>
+<td>The order was created</td>
 </tr>
 </tbody></table>
 <h1 id='api-reference'>API Reference</h1>
@@ -662,10 +746,6 @@ You must replace <code>yourapikey</code> with your API key.
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-          </div>
       </div>
     </div>
   </body>

@@ -82,12 +82,20 @@ GumCart.addItem({
     name: "My nice Product",
     quantity: 1,
     price: 79.99,
-});
+})
+    .then((item) => {
+        // successfully added to cart
+        console.log(item.name + " was added to cart");
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Add a single item to the cart.
 
-_Returns TRUE_
+_Returns a Promise_
 
 | Parameter | Description                                     |
 | --------- | ----------------------------------------------- |
@@ -101,46 +109,83 @@ See the list of the parameters on **The Cart Item Object**
 ## Update an item
 
 ```js
-GumCart.updateItem("unique-product-id", {
+GumCart.updateItem(itemId, {
     quantity: 3,
-});
+})
+    .then((item) => {
+        // successfully updated
+        console.log(item.name + " was updated");
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Update properties of a single cart item by ID.
 
 See the list of available properties on **The Cart Item Object**
 
-_Returns the updated cart item object_
+_Returns a Promise_
 
 ## Remove an item
 
 ```js
-GumCart.removeItem("unique-product-id");
+GumCart.removeItem(itemId)
+    .then((item) => {
+        // successfully removed
+        console.log(item.name + " was removed from the cart");
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Remove a single item from the cart by ID.
 
-_Returns TRUE/FALSE_
+_Returns a Promise_
 
 ## Get all items
 
 ```js
-GumCart.getItems();
+GumCart.getItems()
+    .then((items) => {
+        // successfully returned the array of items
+        // loop through the array of items
+        if (items.length) {
+            items.forEach((item) => {
+                console.log(item.name);
+            });
+        }
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Get the list of items from the cart.
 
-_Returns array of cart items_
+_Returns a Promise_
 
 ## Empty the cart
 
 ```js
-GumCart.empty();
+GumCart.empty()
+    .then(() => {
+        // successfully emptied the cart
+        console.log("The cart was emptied");
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Removes all items from the cart.
 
-_Returns TRUE/FALSE_
+_Returns a Promise_
 
 ## Update Customer Info
 
@@ -148,41 +193,56 @@ _Returns TRUE/FALSE_
 GumCart.setCustomer({
     email: "john.doe@gumcart.com",
     name: "John Doe",
-});
+})
+    .then((customer) => {
+        // successfully updated customer info
+        console.log("The customer info was updated.");
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
-Update the cart with customer information.
+Update the checkout with customer information.
 
-_Returns TRUE/FALSE_
+_Returns a Promise_
 
-## Get Customer Data
+## Get Customer Info
 
 ```js
-GumCart.getCustomer();
+GumCart.getCustomer()
+    .then((customer) => {
+        // successfully received the customer info
+        console.log("Customer name: " + customer.name);
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Get the cart customer information.
 
-_Returns customer data object_
+_Returns a Promise_
 
 ## Update Shipping Info
 
 ```js
 GumCart.setShipping({
-    address: {
-        address: "132 Harvest Way",
-        city: "Crandall",
-        state: "TX",
-        zip: "75114",
-        country: "US",
-    },
+    address: "132 Harvest Way",
+    city: "Crandall",
+    state: "TX",
+    zip: "75114",
+    country: "US",
     method: "flat",
 })
-    .then(() => {
-        // This code runs once customer data was set
+    .then((shipping) => {
+        // successfully updated shipping info
+        console.log(shipping);
     })
     .catch((err) => {
-        // This code runs if there were any errors
+        // oops something bad happened
         console.log(err);
     });
 ```
@@ -194,39 +254,50 @@ _Returns TRUE/FALSE_
 ## Get Shipping Info
 
 ```js
-GumCart.getShipping();
+GumCart.getShipping()
+    .then((shipping) => {
+        // successfully emptied the cart
+        console.log("Shipping address:" + shipping.address);
+    })
+    .catch((err) => {
+        // oops something bad happened
+        console.log(err);
+    });
 ```
 
 Get the cart shipping information.
 
-_Returns object_
-
-## Set Shipping Value
-
-```js
-GumCart.setShippingValue(value);
-```
-
-Sets the cart shipping value. This method allows you to create custom shipping cost calculation and override the cart one.
-
-_Returns TRUE/FALSE_
+_Returns a Promise_
 
 ## Events
 
+These events will fire anytime an action happen in the shopping cart or checkout flow. Use listeners to customise the experience.
+
 ```js
-document.addEventListener("gumcart.ready", (e) => {
-    // cart is loaded, do something here
+GumCart.on("ready", (data) => {
+    // GumCart is loaded, do something here
 });
 ```
 
-| Event                | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| gumcart.ready        | The shopping cart is loaded & ready                |
-| gumcart.open         | The shopping cart opened                           |
-| gumcart.close        | The shopping cart closed                           |
-| gumcart.empty        | The shopping cart was emptied                      |
-| gumcart.step         | The shopping cart switched from cart/checkout step |
-| gumcart.item.added   | Item was added                                     |
-| gumcart.item.removed | Item was removed                                   |
-| gumcart.items.update | One of the cart items was updated                  |
-| gumcart.value.update | The cart total amount was changed                  |
+```js
+GumCart.on("totals.change", (data) => {
+    // GumCart totals change, console log the amounts
+    console.log("Shipping: $" + data.shipping_price);
+    console.log("Tax: $" + data.tax_amount);
+    console.log("Total amount: $" + data.total_amount);
+});
+```
+
+| Event name      | Data     | Description                      |
+| --------------- | -------- | -------------------------------- |
+| ready           | -        | The cart is loaded & ready       |
+| open            | -        | The shopping cart opened         |
+| close           | -        | The shopping cart closed         |
+| item.add        | item     | Item was added to cart           |
+| item.update     | item     | The cart item was updated        |
+| item.remove     | item     | Item was removed from cart       |
+| totals.change   | totals   | Total amount of the cart changed |
+| customer.change | customer | Customer data was updated        |
+| shipping.change | shipping | Shipping info was updated        |
+| billing.change  | billing  | Billing info was updated         |
+| order.create    | order    | The order was created            |

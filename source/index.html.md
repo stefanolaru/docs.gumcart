@@ -1,9 +1,8 @@
 ---
 title: GumCart Documentation
 
-language_tabs: # must be one of https://git.io/vQNgJ
-    - shell
-    - javascript
+#language_tabs: # must be one of https://git.io/vQNgJ
+#    - javascript
 
 toc_footers:
     - <a href='https://gumcart.com'>Sign Up on GumCart</a>

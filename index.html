@@ -350,6 +350,12 @@
                     <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
+                    <a href="#cart" class="toc-h2 toc-link" data-title="Cart">Cart</a>
+                  </li>
+                  <li>
+                    <a href="#cart-items" class="toc-h2 toc-link" data-title="Cart Items">Cart Items</a>
+                  </li>
+                  <li>
                     <a href="#orders" class="toc-h2 toc-link" data-title="Orders">Orders</a>
                   </li>
                   <li>
@@ -367,10 +373,16 @@
                     <a href="#cartitem" class="toc-h2 toc-link" data-title="CartItem">CartItem</a>
                   </li>
                   <li>
+                    <a href="#checkout" class="toc-h2 toc-link" data-title="Checkout">Checkout</a>
+                  </li>
+                  <li>
                     <a href="#customer" class="toc-h2 toc-link" data-title="Customer">Customer</a>
                   </li>
                   <li>
                     <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
+                  </li>
+                  <li>
+                    <a href="#error" class="toc-h2 toc-link" data-title="Error">Error</a>
                   </li>
               </ul>
           </li>
@@ -749,17 +761,215 @@ curl <span class="s2">"https://api.gumcart.com"</span>
 
 <p>GumCart uses API keys to allow access to the API. To obtain an API key please go to https://www.gumcart.com</p>
 
-<p>We expect for the API key to be included in the majority of API requests in a header that looks like the following:</p>
+<p>We expect for the API key to be included for all the private API requests in a header that looks like the following:</p>
 
 <p><code>X-APIKEY: yourapikey</code></p>
 
 <aside class="notice">
 You must replace <code>yourapikey</code> with your API key.
 </aside>
+
+<p>We expect for the SHOPID to be included for all the public API requests in a header that looks like the following:</p>
+
+<p><code>X-SHOPID: yourshopid</code></p>
+
+<aside class="notice">
+You must replace <code>yourshopid</code> with your shop ID.
+</aside>
+<h2 id='cart'>Cart</h2>
+<p>We expect for the shop_id to be included for all <strong>/cart</strong> API requests in a header that looks like the following:</p>
+
+<p><code>X-SHOPID: yourshopid</code></p>
+
+<p><em>The X-APIKEY header will be ignored.</em></p>
+
+<aside class="notice">
+The <strong>/cart</strong> methods are publicly accessible.
+</aside>
+<h3 id='get-cart'>Get Cart</h3>
+<blockquote>
+<p>Sample request for retrieving the cart data:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> GET <span class="s2">"https://api.gumcart.com/cart/a35a29b5-4a0d-4681-b070-ee19db86ed46"</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'X-SHOPID: 0a6c50ce-9006-4bda-bea4-2a6832f86684'</span> <span class="se">\</span>
+</code></pre></div>
+<p><code>GET /cart or GET /cart/:cart_id</code></p>
+
+<table><thead>
+<tr>
+<th>URL Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cart_id</td>
+<td>The cart unique ID</td>
+</tr>
+</tbody></table>
+
+<p>If <strong>cart_id</strong> wasn&#39;t provided a new cart will be created, the cart_id will be available in the response.</p>
+
+<p>If <strong>cart_id</strong> was provided but no cart exists, a new cart will be created with a new cart_id.</p>
+
+<p>This method will return the updated <a href="#cart">Cart</a> object on success or <a href="#error">Error</a> on failure.</p>
+<h3 id='update-cart'>Update Cart</h3>
+<blockquote>
+<p>Sample request for emptying the cart items:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> PATCH <span class="s2">"https://api.gumcart.com/cart/a35a29b5-4a0d-4681-b070-ee19db86ed46"</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'X-SHOPID: 0a6c50ce-9006-4bda-bea4-2a6832f86684'</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{"items": []}'</span>
+</code></pre></div>
+<p><code>PATCH /cart/:cart_id</code></p>
+
+<table><thead>
+<tr>
+<th>URL Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cart_id</td>
+<td>The cart unique ID</td>
+</tr>
+</tbody></table>
+
+<p>Pass the <a href="#cart">Cart</a> object properties to be updated as body.</p>
+
+<p>This method will return the updated <a href="#cart">Cart</a> object on success or <a href="#error">Error</a> on failure.</p>
+<h3 id='delete-cart'>Delete Cart</h3>
+<blockquote>
+<p>Sample request for deleting the cart with all it&#39;s data:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> DELETE <span class="s2">"https://api.gumcart.com/cart/a35a29b5-4a0d-4681-b070-ee19db86ed46"</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'X-SHOPID: 0a6c50ce-9006-4bda-bea4-2a6832f86684'</span> <span class="se">\</span>
+</code></pre></div>
+<p><code>DELETE /cart/:cart_id</code></p>
+
+<table><thead>
+<tr>
+<th>URL Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cart_id</td>
+<td>The cart unique ID</td>
+</tr>
+</tbody></table>
+
+<p>This method will <strong>true</strong> on success or <a href="#error">Error</a> on failure.</p>
+<h2 id='cart-items'>Cart Items</h2>
+<p>We expect for the shop_id to be included for all <strong>/cartitems</strong> API requests in a header that looks like the following:</p>
+
+<p><code>X-SHOPID: yourshopid</code></p>
+
+<p><em>The X-APIKEY header will be ignored.</em></p>
+
+<aside class="notice">
+The <strong>/cartitems</strong> methods are publicly accessible.
+</aside>
+<h3 id='add-item'>Add Item</h3>
+<blockquote>
+<p>Sample request for adding an item to cart:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> POST <span class="s2">"https://api.gumcart.com/cartitems/a35a29b5-4a0d-4681-b070-ee19db86ed46"</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'X-SHOPID: 0a6c50ce-9006-4bda-bea4-2a6832f86684'</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{"id": "HEADPHONES", "name": "Wireless Headphones", "price": 89, "quantity": 1, "description": "Something here to be updated", "images": ["https://www.gumcart.com/assets/images/product-1.jpg"]}'</span>
+</code></pre></div>
+<blockquote>
+<p>Sample cart item object:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEADPHONES"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wireless Headphones"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Something here to be updated"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://www.gumcart.com/assets/images/product-1.jpg"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Use this method to add new items to cart.</p>
+
+<p><code>POST /cartitems/:cart_id</code></p>
+
+<table><thead>
+<tr>
+<th>URL Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cart_id</td>
+<td>The cart unique ID</td>
+</tr>
+</tbody></table>
+
+<p>Pass the <a href="#cartitem">CartItem</a> object as body.</p>
+
+<p>This method will return the updated <a href="#cart">Cart</a> object on success or <a href="#error">Error</a> on failure.</p>
+<h3 id='update-item'>Update Item</h3>
+<p><code>PUT /cartitems/:cart_id/:item_id</code></p>
+
+<table><thead>
+<tr>
+<th>URL Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cart_id</td>
+<td>The cart unique ID</td>
+</tr>
+<tr>
+<td>item_id</td>
+<td>The cart item ID</td>
+</tr>
+</tbody></table>
+
+<p>Pass the <a href="#cartitem">CartItem</a> object as body.</p>
+
+<p>This method will return the updated <a href="#cart">Cart</a> object on success or <a href="#error">Error</a> on failure.</p>
+<h3 id='remove-item'>Remove Item</h3>
+<p><code>DELETE /cartitems/:cart_id/:item_id</code></p>
+
+<table><thead>
+<tr>
+<th>URL Param</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cart_id</td>
+<td>The cart unique ID</td>
+</tr>
+<tr>
+<td>item_id</td>
+<td>The cart item ID</td>
+</tr>
+</tbody></table>
+
+<p>This method will return the updated <a href="#cart">Cart</a> object on success or <a href="#error">Error</a> on failure.</p>
 <h2 id='orders'>Orders</h2>
 <p>In progress.</p>
 <h2 id='shop'>Shop</h2>
-<p>In progress.</p>
+<p>We expect for the shop_id to be included for all <strong>/shop</strong> API requests in a header that looks like the following:</p>
+
+<p><code>X-SHOPID: yourshopid</code></p>
+
+<p><em>The X-APIKEY header will be ignored.</em></p>
+
+<aside class="notice">
+The <strong>/shop</strong> methods are publicly accessible.
+</aside>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> GET <span class="s2">"https://api.gumcart.com/shop"</span> <span class="se">\</span>
+  <span class="nt">-h</span> <span class="s1">'X-SHOPID: 0a6c50ce-9006-4bda-bea4-2a6832f86684'</span> <span class="se">\</span>
+</code></pre></div>
+<p><code>GET https://api.gumcart.com/shop</code></p>
+
+<p>This method will return the <a href="#shop">Shop</a> object on success or <a href="#error">Error</a> on failure.</p>
 <h1 id='object-definitions'>Object Definitions</h1>
 <p>Common object definitions</p>
 <h2 id='cart'>Cart</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -864,7 +1074,7 @@ You must replace <code>yourapikey</code> with your API key.
 <tr>
 <td>id</td>
 <td>String*</td>
-<td>The cart item unique identifier</td>
+<td>The item unique ID</td>
 </tr>
 <tr>
 <td>name</td>
@@ -873,7 +1083,7 @@ You must replace <code>yourapikey</code> with your API key.
 </tr>
 <tr>
 <td>description</td>
-<td>String*</td>
+<td>String</td>
 <td>Item description</td>
 </tr>
 <tr>
@@ -892,7 +1102,7 @@ You must replace <code>yourapikey</code> with your API key.
 <td>Image URLs (must be publicly accessible)</td>
 </tr>
 <tr>
-<td>meta</td>
+<td>metadata</td>
 <td>Object</td>
 <td>Custom meta object</td>
 </tr>
@@ -901,6 +1111,41 @@ You must replace <code>yourapikey</code> with your API key.
 <aside class="notice">
 The fields marked with <strong>*</strong> are required
 </aside>
+<h2 id='checkout'>Checkout</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"shop_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cart_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"shipping"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"billing"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>shop_id</td>
+<td>String*</td>
+<td>The shop unique identifier</td>
+</tr>
+<tr>
+<td>cart_id</td>
+<td>String*</td>
+<td>The cart item unique identifier</td>
+</tr>
+<tr>
+<td>billing</td>
+<td>Object</td>
+<td>Billing address <a href="#address">Address</a></td>
+</tr>
+<tr>
+<td>shipping</td>
+<td>Object</td>
+<td>Shipping address <a href="#address">Address</a></td>
+</tr>
+</tbody></table>
 <h2 id='customer'>Customer</h2>
 <p>The customer object reference.</p>
 <h2 id='address'>Address</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">example</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">address</span><span class="w"> </span><span class="err">object</span><span class="w">
@@ -967,6 +1212,47 @@ The fields marked with <strong>*</strong> are required
 <aside class="notice">
 The fields marked with <strong>*</strong> are required
 </aside>
+<h2 id='error'>Error</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The hepful but dreaded error message"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>The API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- You&#39;re not allowed to access that listing.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified listing could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access listing with an invalid method.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">

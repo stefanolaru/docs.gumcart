@@ -10,6 +10,7 @@ toc_footers:
 includes:
     - gumcart.js
     - api
+    - defs
     # - errors
 
 search: true

@@ -357,6 +357,23 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#object-definitions" class="toc-h1 toc-link" data-title="Object Definitions">Object Definitions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#cart" class="toc-h2 toc-link" data-title="Cart">Cart</a>
+                  </li>
+                  <li>
+                    <a href="#cartitem" class="toc-h2 toc-link" data-title="CartItem">CartItem</a>
+                  </li>
+                  <li>
+                    <a href="#customer" class="toc-h2 toc-link" data-title="Customer">Customer</a>
+                  </li>
+                  <li>
+                    <a href="#address" class="toc-h2 toc-link" data-title="Address">Address</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
             <li><a href='https://gumcart.com'>Sign Up on GumCart</a></li>
@@ -743,6 +760,213 @@ You must replace <code>yourapikey</code> with your API key.
 <p>In progress.</p>
 <h2 id='shop'>Shop</h2>
 <p>In progress.</p>
+<h1 id='object-definitions'>Object Definitions</h1>
+<p>Common object definitions</p>
+<h2 id='cart'>Cart</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"shop_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cart_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">Array</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">CartItem</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610181890</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610181900</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1611391500</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">updated</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="err">days</span><span class="w">
+    </span><span class="nl">"items_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"items_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"items_count_unique"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"shipping_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tax_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>shop_id</td>
+<td>String</td>
+<td>The shop unique identifier</td>
+</tr>
+<tr>
+<td>cart_id</td>
+<td>String</td>
+<td>The cart unique identifier</td>
+</tr>
+<tr>
+<td>items</td>
+<td>Array</td>
+<td>Items in the cart <a href="#cartitem">CartItem</a></td>
+</tr>
+<tr>
+<td>created</td>
+<td>Int</td>
+<td>The UNIX timestamp the cart was created</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>Int</td>
+<td>The UNIX timestamp the cart was updated</td>
+</tr>
+<tr>
+<td>items_amount</td>
+<td>Int</td>
+<td>Sum of cart items</td>
+</tr>
+<tr>
+<td>items_count</td>
+<td>Int</td>
+<td>Then number of total items in the cart</td>
+</tr>
+<tr>
+<td>items_count_unique</td>
+<td>Int</td>
+<td>Then number of total unique items in the cart</td>
+</tr>
+<tr>
+<td>shipping_amount</td>
+<td>Int</td>
+<td>The items shipping amount</td>
+</tr>
+<tr>
+<td>tax_amount</td>
+<td>Int</td>
+<td>The items tax amount</td>
+</tr>
+<tr>
+<td>total_amount</td>
+<td>Int</td>
+<td>The total amount of the cart</td>
+</tr>
+</tbody></table>
+<h2 id='cartitem'>CartItem</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPARKRC900TEAM"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Spark RC900 Team Bike"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The SCOTT Spark RC is perhaps the most successful full-suspension XC race bike of its time."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">359998</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://placehold.it/1600x1200"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>The cart item object reference. The cart item object is flexible, you can extend it using the <strong>meta</strong> property.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>String*</td>
+<td>The cart item unique identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String*</td>
+<td>Item name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String*</td>
+<td>Item description</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Int*</td>
+<td>Item price in cents (/100)</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Int*</td>
+<td>Item quantity</td>
+</tr>
+<tr>
+<td>images</td>
+<td>Array</td>
+<td>Image URLs (must be publicly accessible)</td>
+</tr>
+<tr>
+<td>meta</td>
+<td>Object</td>
+<td>Custom meta object</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The fields marked with <strong>*</strong> are required
+</aside>
+<h2 id='customer'>Customer</h2>
+<p>The customer object reference.</p>
+<h2 id='address'>Address</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">example</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">address</span><span class="w"> </span><span class="err">object</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Marissa Doe"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"132 Harvest Way"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"line2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crandall"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75114"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>company</td>
+<td>String</td>
+<td>Company name</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String*</td>
+<td>Recipient name</td>
+</tr>
+<tr>
+<td>line1</td>
+<td>String*</td>
+<td>Address line 1</td>
+</tr>
+<tr>
+<td>line2</td>
+<td>String</td>
+<td>Address line 2</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String*</td>
+<td>The address city</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>The address state/county/provice</td>
+</tr>
+<tr>
+<td>postal_code</td>
+<td>String*</td>
+<td>The address post/zip code</td>
+</tr>
+<tr>
+<td>country</td>
+<td>String*</td>
+<td>The address country (ISO 3166 Alpha-2 code)</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The fields marked with <strong>*</strong> are required
+</aside>
 
       </div>
       <div class="dark-box">

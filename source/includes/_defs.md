@@ -55,17 +55,35 @@ The cart item object reference. The cart item object is flexible, you can extend
 
 | Property    | Type     | Description                              |
 | ----------- | -------- | ---------------------------------------- |
-| id          | String\* | The cart item unique identifier          |
+| id          | String\* | The item unique ID                       |
 | name        | String\* | Item name                                |
-| description | String\* | Item description                         |
+| description | String   | Item description                         |
 | price       | Int\*    | Item price in cents (/100)               |
 | quantity    | Int\*    | Item quantity                            |
 | images      | Array    | Image URLs (must be publicly accessible) |
-| meta        | Object   | Custom meta object                       |
+| metadata    | Object   | Custom meta object                       |
 
 <aside class="notice">
 The fields marked with <strong>*</strong> are required
 </aside>
+
+## Checkout
+
+```json
+{
+    "shop_id": "1a6c50ce-9006-4bda-bea4-2a6832f86684",
+    "cart_id": "0a6c50ce-9006-4bda-bea4-2a6832f86684",
+    "shipping": {},
+    "billing": {}
+}
+```
+
+| Property | Type     | Description                          |
+| -------- | -------- | ------------------------------------ |
+| shop_id  | String\* | The shop unique identifier           |
+| cart_id  | String\* | The cart item unique identifier      |
+| billing  | Object   | Billing address [Address](#address)  |
+| shipping | Object   | Shipping address [Address](#address) |
 
 ## Customer
 
@@ -101,3 +119,23 @@ The customer object reference.
 <aside class="notice">
 The fields marked with <strong>*</strong> are required
 </aside>
+
+## Error
+
+```json
+{
+    "error": "The hepful but dreaded error message"
+}
+```
+
+The API uses the following error codes:
+
+| Code | Meaning                                                                                   |
+| ---- | ----------------------------------------------------------------------------------------- |
+| 400  | Bad Request -- Your request is invalid.                                                   |
+| 401  | Unauthorized -- Your API key is wrong.                                                    |
+| 403  | Forbidden -- You're not allowed to access that listing.                                   |
+| 404  | Not Found -- The specified listing could not be found.                                    |
+| 405  | Method Not Allowed -- You tried to access listing with an invalid method.                 |
+| 500  | Internal Server Error -- We had a problem with our server. Try again later.               |
+| 503  | Service Unavailable -- We're temporarily offline for maintenance. Please try again later. |

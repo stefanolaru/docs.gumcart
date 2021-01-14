@@ -182,15 +182,7 @@ In progress.
 
 ## Shop
 
-We expect for the shop_id to be included for all **/shop** API requests in a header that looks like the following:
-
-`X-SHOPID: yourshopid`
-
-_The X-APIKEY header will be ignored._
-
-<aside class="notice">
-The <strong>/shop</strong> methods are publicly accessible.
-</aside>
+### Get Shop (public data)
 
 ```shell
 curl -x GET "https://api.gumcart.com/shop" \
@@ -198,5 +190,9 @@ curl -x GET "https://api.gumcart.com/shop" \
 ```
 
 `GET https://api.gumcart.com/shop`
+
+We expect for the shop_id to be included in the API requests in a header that looks like the following:
+
+`X-SHOPID: yourshopid`
 
 This method will return the [Shop](#shop) object on success or [Error](#error) on failure.

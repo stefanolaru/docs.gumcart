@@ -6,7 +6,6 @@ Common object definitions
 
 ```json
 {
-    "shop_id": "1a6c50ce-9006-4bda-bea4-2a6832f86684",
     "cart_id": "0a6c50ce-9006-4bda-bea4-2a6832f86684",
     "items": [
         // Array of CartItem
@@ -15,27 +14,43 @@ Common object definitions
     "updated": 1610181900,
     "expires": 1611391500, // updated + 14 days
     "items_amount": 0,
-    "items_count": 0,
-    "items_count_unique": 0,
+    "customer": {
+        // customer info
+    },
     "shipping_amount": 0,
+    "shipping_address": {
+        // shipping address
+    },
+    "shipping_method": null,
+    "billing_method": null,
+    "billing_address": {
+        // billing address
+    },
     "tax_amount": 0,
     "total_amount": 0
 }
 ```
 
-| Property           | Type   | Description                                   |
-| ------------------ | ------ | --------------------------------------------- |
-| shop_id            | String | The shop unique identifier                    |
-| cart_id            | String | The cart unique identifier                    |
-| items              | Array  | Items in the cart [CartItem](#cartitem)       |
-| created            | Int    | The UNIX timestamp the cart was created       |
-| updated            | Int    | The UNIX timestamp the cart was updated       |
-| items_amount       | Int    | Sum of cart items                             |
-| items_count        | Int    | Then number of total items in the cart        |
-| items_count_unique | Int    | Then number of total unique items in the cart |
-| shipping_amount    | Int    | The items shipping amount                     |
-| tax_amount         | Int    | The items tax amount                          |
-| total_amount       | Int    | The total amount of the cart                  |
+| Property         | Type   | Description                             |
+| ---------------- | ------ | --------------------------------------- |
+| _cart_id_        | String | The cart unique identifier              |
+| items            | Array  | Items in the cart [CartItem](#cartitem) |
+| _created_        | Int    | The UNIX timestamp the cart was created |
+| _updated_        | Int    | The UNIX timestamp the cart was updated |
+| _expires_        | Int    | The UNIX timestamp the cart will expire |
+| items_amount     | Int    | The total amount of the cart items      |
+| customer         | Object | Customer [Customer](#customer)          |
+| shipping_amount  | Int    | The items shipping amount               |
+| shipping_address | Object | Shipping address [Address](#address)    |
+| shipping_method  | String | The shipping method ID                  |
+| billing_address  | Object | Billing address [Address](#address)     |
+| billing_method   | String | The shipping method ID                  |
+| tax_amount       | Int    | The items tax amount                    |
+| _total_amount_   | Int    | The total amount of the cart            |
+
+<aside class="notice">
+The <em>emphasized</em> properties are read only. <br />The fields marked with <strong>*</strong> are required
+</aside>
 
 ## CartItem
 
@@ -47,7 +62,25 @@ Common object definitions
     "price": 359998,
     "quantity": 1,
     "images": ["https://placehold.it/1600x1200"],
-    "meta": {}
+    "options": [
+        {
+            "name": "Color",
+            "value": "Orange"
+        },
+        {
+            "name": "Size",
+            "value": "M"
+        }
+        // ...
+    ],
+    "addons": [
+        {
+            "name": "Syncros Bottle Cage (Left)",
+            "price": 999
+        }
+        // ...
+    ],
+    "metadata": {}
 }
 ```
 
@@ -58,10 +91,52 @@ The cart item object reference. The cart item object is flexible, you can extend
 | id          | String\* | The item unique ID                       |
 | name        | String\* | Item name                                |
 | description | String   | Item description                         |
-| price       | Int\*    | Item price in cents (/100)               |
+| price       | Int\*    | Item price in cents (price/100)          |
 | quantity    | Int\*    | Item quantity                            |
 | images      | Array    | Image URLs (must be publicly accessible) |
+| options     | Array    | [CartItemOption](#cartitemoption)        |
+| addons      | Array    | [CartItemAddon](#cartitemaddon)          |
 | metadata    | Object   | Custom meta object                       |
+
+<aside class="notice">
+The fields marked with <strong>*</strong> are required
+</aside>
+
+## CartItemOption
+
+```json
+{
+    "name": "Size",
+    "value": "Medium"
+}
+```
+
+Use for CartItem that have options (like colors and sizes).
+
+| Property | Type     | Description  |
+| -------- | -------- | ------------ |
+| name     | String\* | Option name  |
+| value    | String\* | Option value |
+
+<aside class="notice">
+The fields marked with <strong>*</strong> are required
+</aside>
+
+## CartItemAddon
+
+```json
+{
+    "name": "Size",
+    "price": 200
+}
+```
+
+Use for CartItem that have addons (like extra bacon).
+
+| Property | Type     | Description                      |
+| -------- | -------- | -------------------------------- |
+| name     | String\* | Option name                      |
+| price    | Int\*    | Addon price in cents (price/100) |
 
 <aside class="notice">
 The fields marked with <strong>*</strong> are required
@@ -71,10 +146,10 @@ The fields marked with <strong>*</strong> are required
 
 ```json
 {
-    "shop_id": "1a6c50ce-9006-4bda-bea4-2a6832f86684",
     "cart_id": "0a6c50ce-9006-4bda-bea4-2a6832f86684",
-    "shipping": {},
-    "billing": {}
+    "customer": {},
+    "shipping_address": {},
+    "billing_address": {}
 }
 ```
 
@@ -82,6 +157,7 @@ The fields marked with <strong>*</strong> are required
 | -------- | -------- | ------------------------------------ |
 | shop_id  | String\* | The shop unique identifier           |
 | cart_id  | String\* | The cart item unique identifier      |
+| customer | Object   | Customer [Customer](#customer)       |
 | billing  | Object   | Billing address [Address](#address)  |
 | shipping | Object   | Shipping address [Address](#address) |
 
@@ -95,26 +171,26 @@ The customer object reference.
 // example of the address object
 {
     "company": "",
-    "name": "Marissa Doe", // required
-    "line1": "132 Harvest Way", // required
+    "name": "Marissa Doe",
+    "line1": "132 Harvest Way",
     "line2": "",
-    "city": "Crandall", // required
+    "city": "Crandall",
     "state": "TX",
-    "postal_code": "75114", // required
-    "country": "US" // required
+    "postal_code": "75114",
+    "country": "US"
 }
 ```
 
-| Field       | Type     | Description                                 |
-| ----------- | -------- | ------------------------------------------- |
-| company     | String   | Company name                                |
-| name        | String\* | Recipient name                              |
-| line1       | String\* | Address line 1                              |
-| line2       | String   | Address line 2                              |
-| city        | String\* | The address city                            |
-| state       | String   | The address state/county/provice            |
-| postal_code | String\* | The address post/zip code                   |
-| country     | String\* | The address country (ISO 3166 Alpha-2 code) |
+| Field       | Type   | Description                                 |
+| ----------- | ------ | ------------------------------------------- |
+| company     | String | Company name                                |
+| name        | String | Recipient name                              |
+| line1       | String | Address line 1                              |
+| line2       | String | Address line 2                              |
+| city        | String | The address city                            |
+| state       | String | The address state/county/provice            |
+| postal_code | String | The address post/zip code                   |
+| country     | String | The address country (ISO 3166 Alpha-2 code) |
 
 <aside class="notice">
 The fields marked with <strong>*</strong> are required

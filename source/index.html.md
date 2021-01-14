@@ -1,14 +1,14 @@
 ---
-title: GumCart Documentation
+title: Stratocart Documentation
 
 #language_tabs: # must be one of https://git.io/vQNgJ
 #    - javascript
 
 toc_footers:
-    - <a href='https://gumcart.com'>Sign Up on GumCart</a>
+    - <a href='https://stratocart.com'>Sign Up on Stratocart</a>
 
 includes:
-    - gumcart.js
+    - stratocart.js
     - api
     - defs
     # - errors
@@ -20,4 +20,4 @@ code_clipboard: true
 
 # Introduction
 
-Welcome to the **GumCart** documentation.
+Welcome to the **Stratocart** documentation.

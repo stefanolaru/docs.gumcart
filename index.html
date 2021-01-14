@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>GumCart Documentation</title>
+    <title>Stratocart Documentation</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -306,11 +306,8 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#gumcart-js" class="toc-h1 toc-link" data-title="gumcart.js">gumcart.js</a>
+            <a href="#stratocart-js" class="toc-h1 toc-link" data-title="stratocart.js">stratocart.js</a>
               <ul class="toc-list-h2">
-                  <li>
-                    <a href="#the-cart-item" class="toc-h2 toc-link" data-title="The Cart Item">The Cart Item</a>
-                  </li>
                   <li>
                     <a href="#add-an-item" class="toc-h2 toc-link" data-title="Add an item">Add an item</a>
                   </li>
@@ -321,22 +318,28 @@
                     <a href="#remove-an-item" class="toc-h2 toc-link" data-title="Remove an item">Remove an item</a>
                   </li>
                   <li>
-                    <a href="#get-all-items" class="toc-h2 toc-link" data-title="Get all items">Get all items</a>
+                    <a href="#fetch-cart" class="toc-h2 toc-link" data-title="Fetch Cart">Fetch Cart</a>
+                  </li>
+                  <li>
+                    <a href="#update-cart" class="toc-h2 toc-link" data-title="Update Cart">Update Cart</a>
+                  </li>
+                  <li>
+                    <a href="#delete-cart" class="toc-h2 toc-link" data-title="Delete Cart">Delete Cart</a>
+                  </li>
+                  <li>
+                    <a href="#get-cart-items" class="toc-h2 toc-link" data-title="Get cart items">Get cart items</a>
                   </li>
                   <li>
                     <a href="#empty-the-cart" class="toc-h2 toc-link" data-title="Empty the cart">Empty the cart</a>
                   </li>
                   <li>
-                    <a href="#update-customer-info" class="toc-h2 toc-link" data-title="Update Customer Info">Update Customer Info</a>
+                    <a href="#set-customer" class="toc-h2 toc-link" data-title="Set Customer">Set Customer</a>
                   </li>
                   <li>
-                    <a href="#get-customer-info" class="toc-h2 toc-link" data-title="Get Customer Info">Get Customer Info</a>
+                    <a href="#set-shipping-info" class="toc-h2 toc-link" data-title="Set Shipping Info">Set Shipping Info</a>
                   </li>
                   <li>
-                    <a href="#update-shipping-info" class="toc-h2 toc-link" data-title="Update Shipping Info">Update Shipping Info</a>
-                  </li>
-                  <li>
-                    <a href="#get-shipping-info" class="toc-h2 toc-link" data-title="Get Shipping Info">Get Shipping Info</a>
+                    <a href="#set-billing-info" class="toc-h2 toc-link" data-title="Set Billing Info">Set Billing Info</a>
                   </li>
                   <li>
                     <a href="#events" class="toc-h2 toc-link" data-title="Events">Events</a>
@@ -373,6 +376,12 @@
                     <a href="#cartitem" class="toc-h2 toc-link" data-title="CartItem">CartItem</a>
                   </li>
                   <li>
+                    <a href="#cartitemoption" class="toc-h2 toc-link" data-title="CartItemOption">CartItemOption</a>
+                  </li>
+                  <li>
+                    <a href="#cartitemaddon" class="toc-h2 toc-link" data-title="CartItemAddon">CartItemAddon</a>
+                  </li>
+                  <li>
                     <a href="#checkout" class="toc-h2 toc-link" data-title="Checkout">Checkout</a>
                   </li>
                   <li>
@@ -388,125 +397,41 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://gumcart.com'>Sign Up on GumCart</a></li>
+            <li><a href='https://stratocart.com'>Sign Up on Stratocart</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the <strong>GumCart</strong> documentation.</p>
-<h1 id='gumcart-js'>gumcart.js</h1><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://scripts.gumcart.com/latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<p>Welcome to the <strong>Stratocart</strong> documentation.</p>
+<h1 id='stratocart-js'>stratocart.js</h1><div class="highlight"><pre class="highlight html tab-html"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://js.stratocart.com/latest.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>
-    <span class="nb">window</span><span class="p">.</span><span class="nx">GumCart</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">GumCart</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="dl">"</span><span class="s2">shop/id</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">Stratocart</span> <span class="o">&amp;&amp;</span> <span class="nb">window</span><span class="p">.</span><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="dl">"</span><span class="s2">shop/id</span><span class="dl">"</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
-<p>gumcart.js is a small Javascript library that will help seamlessly integrate the shopping cart and checkout flow into a website.</p>
+<p>stratocart.js is a small Javascript library that will help seamlessly integrate the shopping cart and checkout flow into a website.</p>
 
 <p>Getting started is as easy:</p>
 
 <ol>
-<li>Visit https://gumcart.com to get a shop ID.</li>
-<li>Install gumcart.js via script tag.</li>
+<li>Visit https://stratocart.com to get a shop ID.</li>
+<li>Install stratocart.js via script tag.</li>
 </ol>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// opens the cart</span>
-<span class="nx">GumCart</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
 
 <span class="c1">// closes the cart</span>
-<span class="nx">GumCart</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div>
 <p>Now, let&#39;s use this code to open/close the shopping cart element.</p>
 
 <p>Whoa! That&#39;s simple!</p>
-<h2 id='the-cart-item'>The Cart Item</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPARKRC900TEAM"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Spark RC900 Team Bike"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">3599.98</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"max_quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The SCOTT Spark RC is perhaps the most successful full-suspension XC race bike of its time."</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"280506"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://entry.clubfindersgolf.com/uploads/5f19dd565087d/bh111084a.jpg"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w"> </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frame Size"</span><span class="p">,</span><span class="w"> </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="w"> </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w"> </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Color"</span><span class="p">,</span><span class="w"> </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orange"</span><span class="w"> </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"addons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w"> </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oval Chainring"</span><span class="p">,</span><span class="w"> </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="w"> </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w"> </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syncros Bottle Cage (Left)"</span><span class="p">,</span><span class="w"> </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">9.99</span><span class="w"> </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="mi">10900</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dimensions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>The default cart item object reference. The cart item object is flexible, you can extend it with other properties.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>ID <em>(string)</em></td>
-</tr>
-<tr>
-<td>name</td>
-<td>Product name <em>(string)</em></td>
-</tr>
-<tr>
-<td>price</td>
-<td>Price <em>(float)</em></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>Quantity <em>(integer)</em></td>
-</tr>
-<tr>
-<td>max_quantity</td>
-<td>Max available quantity <em>(integer)</em></td>
-</tr>
-<tr>
-<td>description</td>
-<td>Product description <em>(string)</em></td>
-</tr>
-<tr>
-<td>sku</td>
-<td>SKU <em>(string)</em></td>
-</tr>
-<tr>
-<td>image</td>
-<td>Image URL <em>(string)</em></td>
-</tr>
-<tr>
-<td>options</td>
-<td>Product options <em>(array)</em></td>
-</tr>
-<tr>
-<td>addons</td>
-<td>Product addons <em>(array)</em></td>
-</tr>
-<tr>
-<td>weight</td>
-<td>Weight <em>(integer)</em></td>
-</tr>
-<tr>
-<td>dimensions</td>
-<td>Dimensions <em>(object)</em></td>
-</tr>
-</tbody></table>
-
-<p>The price currency, weight &amp; dimensions units are global settings, will pe set per shop basis.</p>
-<h2 id='add-an-item'>Add an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">addItem</span><span class="p">({</span>
+<h2 id='add-an-item'>Add an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">addItem</span><span class="p">({</span>
     <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">unique-product-id</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">My nice Product</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">quantity</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="na">price</span><span class="p">:</span> <span class="mf">79.99</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mi">7999</span><span class="p">,</span>
 <span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// successfully added to cart</span>
@@ -514,39 +439,44 @@
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
-<p>Add a single item to the cart.</p>
+<p>Add an item to the shopping cart.</p>
 
 <p><em>Returns a Promise</em></p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Property</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>The unique identifier of the product <em>(string)</em></td>
+<td>String*</td>
+<td>The item unique ID</td>
 </tr>
 <tr>
 <td>name</td>
-<td>Product name <em>(string)</em></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>Product quantity <em>(integer)</em></td>
+<td>String*</td>
+<td>Item name</td>
 </tr>
 <tr>
 <td>price</td>
-<td><strong>REQUIRED</strong><br />Price <em>(float)</em></td>
+<td>Int*</td>
+<td>Item price in cents (price/100)</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Int*</td>
+<td>Item quantity</td>
 </tr>
 </tbody></table>
 
-<p>See the list of the parameters on <strong>The Cart Item Object</strong></p>
-<h2 id='update-an-item'>Update an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">updateItem</span><span class="p">(</span><span class="nx">itemId</span><span class="p">,</span> <span class="p">{</span>
+<p>See the complete list of <a href="#cartitem">CartItem properties</a></p>
+<h2 id='update-an-item'>Update an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">updateItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">unique-product-id</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">quantity</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
 <span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -555,28 +485,69 @@
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
 <p>Update properties of a single cart item by ID.</p>
 
-<p>See the list of available properties on <strong>The Cart Item Object</strong></p>
+<p>See the complete list of <a href="#cartitem">CartItem properties</a></p>
 
 <p><em>Returns a Promise</em></p>
-<h2 id='remove-an-item'>Remove an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="nx">itemId</span><span class="p">)</span>
+<h2 id='remove-an-item'>Remove an item</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">unique-product-id</span><span class="dl">"</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// successfully removed</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> was removed from the cart</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
 <p>Remove a single item from the cart by ID.</p>
 
 <p><em>Returns a Promise</em></p>
-<h2 id='get-all-items'>Get all items</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getItems</span><span class="p">()</span>
+<h2 id='fetch-cart'>Fetch Cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">fetch</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully returned the updated cart object</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
+<p>Refresh the cart object from the API.</p>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h2 id='update-cart'>Update Cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span>
+    <span class="na">shipping_method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">express</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully returned the updated cart object</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
+<p>Updates the <a href="#cart">Cart</a> object properties.</p>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h2 id='delete-cart'>Delete Cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="k">delete</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully deleted the cart</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div>
+<p>Deletes the cart session from the API.</p>
+
+<p><em>Returns a Promise</em></p>
+<h2 id='get-cart-items'>Get cart items</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">getItems</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">items</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// successfully returned the array of items</span>
         <span class="c1">// loop through the array of items</span>
@@ -588,93 +559,190 @@
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
 <p>Get the list of items from the cart.</p>
 
-<p><em>Returns a Promise</em></p>
-<h2 id='empty-the-cart'>Empty the cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+<p><em>Returns a Promise with an array of <a href="#cartitem">CartItem</a> on success</em></p>
+<h2 id='empty-the-cart'>Empty the cart</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// successfully emptied the cart</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The cart was emptied</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
 <p>Removes all items from the cart.</p>
 
 <p><em>Returns a Promise</em></p>
-<h2 id='update-customer-info'>Update Customer Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">setCustomer</span><span class="p">({</span>
-    <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john.doe@gumcart.com</span><span class="dl">"</span><span class="p">,</span>
+<h2 id='set-customer'>Set Customer</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">setCustomer</span><span class="p">({</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">"</span><span class="s2">john.doe@stratocart.com</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John Doe</span><span class="dl">"</span><span class="p">,</span>
 <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// successfully updated customer info</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The customer info was updated.</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">The customer was updated.</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
 </code></pre></div>
-<p>Update the checkout with customer information.</p>
+<p>Update the cart with customer information.</p>
 
-<p><em>Returns a Promise</em></p>
-<h2 id='get-customer-info'>Get Customer Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getCustomer</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">customer</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// successfully received the customer info</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Customer name: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">customer</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h2 id='set-shipping-info'>Set Shipping Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="c1">// set shipping amount</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">setShippingAmount</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated shipping amount</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">.</span><span class="nx">shipping_amount</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
-</code></pre></div>
-<p>Get the cart customer information.</p>
 
-<p><em>Returns a Promise</em></p>
-<h2 id='update-shipping-info'>Update Shipping Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">setShipping</span><span class="p">({</span>
-    <span class="na">address</span><span class="p">:</span> <span class="dl">"</span><span class="s2">132 Harvest Way</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">city</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Crandall</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">state</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TX</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">zip</span><span class="p">:</span> <span class="dl">"</span><span class="s2">75114</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">country</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">flat</span><span class="dl">"</span><span class="p">,</span>
-<span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">shipping</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// successfully updated shipping info</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shipping</span><span class="p">);</span>
+<span class="c1">// set shipping address</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">setShippingAddress</span><span class="p">(</span><span class="nx">address</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated shipping address</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">.</span><span class="nx">shipping_address</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
-</code></pre></div>
-<p>Update the cart with customer shipping information, address or shipping method.</p>
 
-<p><em>Returns TRUE/FALSE</em></p>
-<h2 id='get-shipping-info'>Get Shipping Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">getShipping</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">shipping</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="c1">// successfully emptied the cart</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Shipping address:</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">shipping</span><span class="p">.</span><span class="nx">address</span><span class="p">);</span>
+<span class="c1">// set shipping method</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">setShippingMethod</span><span class="p">(</span><span class="nx">method</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated shipping method</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">.</span><span class="nx">shipping_method</span><span class="p">);</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="c1">// oops something bad happened</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
     <span class="p">});</span>
-</code></pre></div>
-<p>Get the cart shipping information.</p>
+</code></pre></div><h3 id='setshippingamount-amount'>setShippingAmount(amount)</h3>
+<p>Update the shipping amount. Helpful when you want to set the shipping costs from external source.</p>
 
-<p><em>Returns a Promise</em></p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>Int*</td>
+<td>Shipping price in cents (price/100)</td>
+</tr>
+</tbody></table>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h3 id='setshippingaddress-address'>setShippingAddress(address)</h3>
+<p>Update the shipping address.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td>Object*</td>
+<td>Shipping address <a href="#address">Address</a></td>
+</tr>
+</tbody></table>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h3 id='setshippingmethod-method'>setShippingMethod(method)</h3>
+<p>Update the shipping method.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>method_id</td>
+<td>String*</td>
+<td>Shipping method ID</td>
+</tr>
+</tbody></table>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h2 id='set-billing-info'>Set Billing Info</h2><div class="highlight"><pre class="highlight javascript"><code><span class="c1">// set billing address</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">setBillingAddress</span><span class="p">(</span><span class="nx">address</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated billing address</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">.</span><span class="nx">billing_address</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+
+<span class="c1">// set billing method</span>
+<span class="nx">Stratocart</span><span class="p">.</span><span class="nx">setBillingMethod</span><span class="p">(</span><span class="nx">method</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">cart</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// successfully updated billing method</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cart</span><span class="p">.</span><span class="nx">billing_method</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// oops something bad happened</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div><h3 id='setbillingaddress-address'>setBillingAddress(address)</h3>
+<p>Update the billing address.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td>Object*</td>
+<td>Billing address <a href="#address">Address</a></td>
+</tr>
+</tbody></table>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
+<h3 id='setbillingmethod-method'>setBillingMethod(method)</h3>
+<p>Update the billing method.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>method_id</td>
+<td>String*</td>
+<td>Billing method ID</td>
+</tr>
+</tbody></table>
+
+<p><em>Returns a Promise with the full <a href="#cart">Cart</a> object on success</em></p>
 <h2 id='events'>Events</h2>
 <p>These events will fire anytime an action happen in the shopping cart or checkout flow. Use listeners to customise the experience.</p>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">ready</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">ready</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">// GumCart is loaded, do something here</span>
 <span class="p">});</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript"><code><span class="nx">GumCart</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">totals.change</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript"><code><span class="nx">Stratocart</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">totals.change</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="c1">// GumCart totals change, console log the amounts</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Shipping: $</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">shipping_price</span><span class="p">);</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tax: $</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">tax_amount</span><span class="p">);</span>
@@ -704,24 +772,19 @@
 <td>The shopping cart closed</td>
 </tr>
 <tr>
-<td>item.add</td>
+<td>item.added</td>
 <td>item</td>
 <td>Item was added to cart</td>
 </tr>
 <tr>
-<td>item.update</td>
+<td>item.updated</td>
 <td>item</td>
 <td>The cart item was updated</td>
 </tr>
 <tr>
-<td>item.remove</td>
+<td>item.removed</td>
 <td>item</td>
 <td>Item was removed from cart</td>
-</tr>
-<tr>
-<td>totals.change</td>
-<td>totals</td>
-<td>Total amount of the cart changed</td>
 </tr>
 <tr>
 <td>customer.change</td>
@@ -954,26 +1017,19 @@ The <strong>/cartitems</strong> methods are publicly accessible.
 <p>This method will return the updated <a href="#cart">Cart</a> object on success or <a href="#error">Error</a> on failure.</p>
 <h2 id='orders'>Orders</h2>
 <p>In progress.</p>
-<h2 id='shop'>Shop</h2>
-<p>We expect for the shop_id to be included for all <strong>/shop</strong> API requests in a header that looks like the following:</p>
-
-<p><code>X-SHOPID: yourshopid</code></p>
-
-<p><em>The X-APIKEY header will be ignored.</em></p>
-
-<aside class="notice">
-The <strong>/shop</strong> methods are publicly accessible.
-</aside>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> GET <span class="s2">"https://api.gumcart.com/shop"</span> <span class="se">\</span>
+<h2 id='shop'>Shop</h2><h3 id='get-shop-public-data'>Get Shop (public data)</h3><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-x</span> GET <span class="s2">"https://api.gumcart.com/shop"</span> <span class="se">\</span>
   <span class="nt">-h</span> <span class="s1">'X-SHOPID: 0a6c50ce-9006-4bda-bea4-2a6832f86684'</span> <span class="se">\</span>
 </code></pre></div>
 <p><code>GET https://api.gumcart.com/shop</code></p>
+
+<p>We expect for the shop_id to be included in the API requests in a header that looks like the following:</p>
+
+<p><code>X-SHOPID: yourshopid</code></p>
 
 <p>This method will return the <a href="#shop">Shop</a> object on success or <a href="#error">Error</a> on failure.</p>
 <h1 id='object-definitions'>Object Definitions</h1>
 <p>Common object definitions</p>
 <h2 id='cart'>Cart</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"shop_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"cart_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="err">//</span><span class="w"> </span><span class="err">Array</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">CartItem</span><span class="w">
@@ -982,9 +1038,18 @@ The <strong>/shop</strong> methods are publicly accessible.
     </span><span class="nl">"updated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610181900</span><span class="p">,</span><span class="w">
     </span><span class="nl">"expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1611391500</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">updated</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="err">days</span><span class="w">
     </span><span class="nl">"items_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"items_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"items_count_unique"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">customer</span><span class="w"> </span><span class="err">info</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"shipping_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">shipping</span><span class="w"> </span><span class="err">address</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"shipping_method"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"billing_method"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"billing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">billing</span><span class="w"> </span><span class="err">address</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nl">"tax_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"total_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -997,12 +1062,7 @@ The <strong>/shop</strong> methods are publicly accessible.
 </tr>
 </thead><tbody>
 <tr>
-<td>shop_id</td>
-<td>String</td>
-<td>The shop unique identifier</td>
-</tr>
-<tr>
-<td>cart_id</td>
+<td><em>cart_id</em></td>
 <td>String</td>
 <td>The cart unique identifier</td>
 </tr>
@@ -1012,29 +1072,29 @@ The <strong>/shop</strong> methods are publicly accessible.
 <td>Items in the cart <a href="#cartitem">CartItem</a></td>
 </tr>
 <tr>
-<td>created</td>
+<td><em>created</em></td>
 <td>Int</td>
 <td>The UNIX timestamp the cart was created</td>
 </tr>
 <tr>
-<td>updated</td>
+<td><em>updated</em></td>
 <td>Int</td>
 <td>The UNIX timestamp the cart was updated</td>
 </tr>
 <tr>
+<td><em>expires</em></td>
+<td>Int</td>
+<td>The UNIX timestamp the cart will expire</td>
+</tr>
+<tr>
 <td>items_amount</td>
 <td>Int</td>
-<td>Sum of cart items</td>
+<td>The total amount of the cart items</td>
 </tr>
 <tr>
-<td>items_count</td>
-<td>Int</td>
-<td>Then number of total items in the cart</td>
-</tr>
-<tr>
-<td>items_count_unique</td>
-<td>Int</td>
-<td>Then number of total unique items in the cart</td>
+<td>customer</td>
+<td>Object</td>
+<td>Customer <a href="#customer">Customer</a></td>
 </tr>
 <tr>
 <td>shipping_amount</td>
@@ -1042,16 +1102,40 @@ The <strong>/shop</strong> methods are publicly accessible.
 <td>The items shipping amount</td>
 </tr>
 <tr>
+<td>shipping_address</td>
+<td>Object</td>
+<td>Shipping address <a href="#address">Address</a></td>
+</tr>
+<tr>
+<td>shipping_method</td>
+<td>String</td>
+<td>The shipping method ID</td>
+</tr>
+<tr>
+<td>billing_address</td>
+<td>Object</td>
+<td>Billing address <a href="#address">Address</a></td>
+</tr>
+<tr>
+<td>billing_method</td>
+<td>String</td>
+<td>The shipping method ID</td>
+</tr>
+<tr>
 <td>tax_amount</td>
 <td>Int</td>
 <td>The items tax amount</td>
 </tr>
 <tr>
-<td>total_amount</td>
+<td><em>total_amount</em></td>
 <td>Int</td>
 <td>The total amount of the cart</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+The <em>emphasized</em> properties are read only. <br />The fields marked with <strong>*</strong> are required
+</aside>
 <h2 id='cartitem'>CartItem</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPARKRC900TEAM"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Spark RC900 Team Bike"</span><span class="p">,</span><span class="w">
@@ -1059,7 +1143,25 @@ The <strong>/shop</strong> methods are publicly accessible.
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">359998</span><span class="p">,</span><span class="w">
     </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"https://placehold.it/1600x1200"</span><span class="p">],</span><span class="w">
-    </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="nl">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Color"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orange"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Size"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"addons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syncros Bottle Cage (Left)"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">999</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+        </span><span class="err">//</span><span class="w"> </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>The cart item object reference. The cart item object is flexible, you can extend it using the <strong>meta</strong> property.</p>
@@ -1089,7 +1191,7 @@ The <strong>/shop</strong> methods are publicly accessible.
 <tr>
 <td>price</td>
 <td>Int*</td>
-<td>Item price in cents (/100)</td>
+<td>Item price in cents (price/100)</td>
 </tr>
 <tr>
 <td>quantity</td>
@@ -1102,6 +1204,16 @@ The <strong>/shop</strong> methods are publicly accessible.
 <td>Image URLs (must be publicly accessible)</td>
 </tr>
 <tr>
+<td>options</td>
+<td>Array</td>
+<td><a href="#cartitemoption">CartItemOption</a></td>
+</tr>
+<tr>
+<td>addons</td>
+<td>Array</td>
+<td><a href="#cartitemaddon">CartItemAddon</a></td>
+</tr>
+<tr>
 <td>metadata</td>
 <td>Object</td>
 <td>Custom meta object</td>
@@ -1111,11 +1223,69 @@ The <strong>/shop</strong> methods are publicly accessible.
 <aside class="notice">
 The fields marked with <strong>*</strong> are required
 </aside>
+<h2 id='cartitemoption'>CartItemOption</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Size"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Use for CartItem that have options (like colors and sizes).</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String*</td>
+<td>Option name</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String*</td>
+<td>Option value</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The fields marked with <strong>*</strong> are required
+</aside>
+<h2 id='cartitemaddon'>CartItemAddon</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Size"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Use for CartItem that have addons (like extra bacon).</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String*</td>
+<td>Option name</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Int*</td>
+<td>Addon price in cents (price/100)</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The fields marked with <strong>*</strong> are required
+</aside>
 <h2 id='checkout'>Checkout</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"shop_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"cart_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0a6c50ce-9006-4bda-bea4-2a6832f86684"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"shipping"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="nl">"billing"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="nl">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"shipping_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nl">"billing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
@@ -1136,6 +1306,11 @@ The fields marked with <strong>*</strong> are required
 <td>The cart item unique identifier</td>
 </tr>
 <tr>
+<td>customer</td>
+<td>Object</td>
+<td>Customer <a href="#customer">Customer</a></td>
+</tr>
+<tr>
 <td>billing</td>
 <td>Object</td>
 <td>Billing address <a href="#address">Address</a></td>
@@ -1151,13 +1326,13 @@ The fields marked with <strong>*</strong> are required
 <h2 id='address'>Address</h2><div class="highlight"><pre class="highlight json tab-json"><code><span class="err">//</span><span class="w"> </span><span class="err">example</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">address</span><span class="w"> </span><span class="err">object</span><span class="w">
 </span><span class="p">{</span><span class="w">
     </span><span class="nl">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Marissa Doe"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
-    </span><span class="nl">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"132 Harvest Way"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Marissa Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"132 Harvest Way"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"line2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crandall"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crandall"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TX"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75114"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
-    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">required</span><span class="w">
+    </span><span class="nl">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"75114"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <table><thead>
@@ -1174,12 +1349,12 @@ The fields marked with <strong>*</strong> are required
 </tr>
 <tr>
 <td>name</td>
-<td>String*</td>
+<td>String</td>
 <td>Recipient name</td>
 </tr>
 <tr>
 <td>line1</td>
-<td>String*</td>
+<td>String</td>
 <td>Address line 1</td>
 </tr>
 <tr>
@@ -1189,7 +1364,7 @@ The fields marked with <strong>*</strong> are required
 </tr>
 <tr>
 <td>city</td>
-<td>String*</td>
+<td>String</td>
 <td>The address city</td>
 </tr>
 <tr>
@@ -1199,12 +1374,12 @@ The fields marked with <strong>*</strong> are required
 </tr>
 <tr>
 <td>postal_code</td>
-<td>String*</td>
+<td>String</td>
 <td>The address post/zip code</td>
 </tr>
 <tr>
 <td>country</td>
-<td>String*</td>
+<td>String</td>
 <td>The address country (ISO 3166 Alpha-2 code)</td>
 </tr>
 </tbody></table>
